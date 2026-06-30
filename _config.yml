@@ -1,0 +1,11 @@
+title: Dr. Yuchi Shen — Academic CV
+description: Architecture, structural design, and computation.
+url: https://yuchishen.github.io
+baseurl: /WorkSpaceGit
+encoding: utf-8
+markdown: kramdown
+exclude:
+  - CONTENT_GUIDE.md
+  - Gemfile
+  - Gemfile.lock
+  - README.md

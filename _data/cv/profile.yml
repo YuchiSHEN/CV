@@ -1,0 +1,48 @@
+seo_title: "Dr. Yuchi Shen — Architecture · Structure · Computation"
+seo_description: "Academic CV of Dr. Yuchi Shen — architecture, structural design, and computation."
+name:
+  given: Yuchi
+  family: SHEN
+display_name: Dr. Yuchi Shen
+discipline: "Architecture · Structure · Computation"
+role:
+  - Postdoc Fellow
+  - Assistant Researcher
+institution:
+  - School of Architecture
+  - Southeast University
+location: Nanjing
+coordinates:
+  - "32.06° N"
+  - "118.80° E"
+photo: assets/profile.jpg
+photo_alt: "Portrait of Dr. Yuchi Shen at the Colosseum in Rome"
+contact:
+  - label: Email
+    value: sycarchi@outlook.com
+    href: "mailto:sycarchi@outlook.com"
+  - label: Phone
+    value: "+86 150 1051 71566"
+    href: "tel:+86150105171566"
+  - label: Born
+    value: "30 Sep 1990"
+  - label: Address
+    value: "Sipailou 2#, Southeast University"
+    secondary: "Nanjing, China"
+intro:
+  lead: >-
+    Computational methods for architectural–structural integration, translating rigorous
+    algorithms into tools that support real design decision-making.
+  body: >-
+    Yuchi Shen received his PhD from Southeast University and completed joint PhD training
+    at ETH Zürich, establishing long-term collaboration across architecture, engineering,
+    and computation.
+navigation:
+  - label: Profile
+    href: "#profile"
+  - label: Research
+    href: "#research"
+  - label: Publications
+    href: "#publications"
+  - label: Developments
+    href: "#developments"
