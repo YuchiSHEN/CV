@@ -1,403 +1,435 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="TestSharedWorkSpace——一个用于协作、分享与持续创造的在线工作空间。"
+      content="Academic CV of Dr. Yuchi Shen — architecture, structural design, and computation."
     />
-    <title>TestSharedWorkSpace</title>
-    <style>
-      :root {
-        color-scheme: dark;
-        --bg: #070b17;
-        --panel: rgba(18, 25, 48, 0.72);
-        --panel-border: rgba(255, 255, 255, 0.1);
-        --text: #f6f7fb;
-        --muted: #a9b0c3;
-        --accent: #8b7cff;
-        --accent-soft: #5eead4;
-        --max-width: 1120px;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
-      html {
-        scroll-behavior: smooth;
-      }
-
-      body {
-        margin: 0;
-        min-width: 320px;
-        min-height: 100vh;
-        overflow-x: hidden;
-        font-family:
-          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-          "Segoe UI", sans-serif;
-        color: var(--text);
-        background:
-          radial-gradient(circle at 18% 5%, rgba(139, 124, 255, 0.24), transparent 31rem),
-          radial-gradient(circle at 84% 35%, rgba(94, 234, 212, 0.13), transparent 28rem),
-          var(--bg);
-      }
-
-      body::before {
-        position: fixed;
-        inset: 0;
-        z-index: -1;
-        content: "";
-        opacity: 0.3;
-        background-image:
-          linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-        background-size: 48px 48px;
-        mask-image: linear-gradient(to bottom, black, transparent 85%);
-      }
-
-      a {
-        color: inherit;
-      }
-
-      .shell {
-        width: min(calc(100% - 40px), var(--max-width));
-        margin: 0 auto;
-      }
-
-      header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        min-height: 82px;
-      }
-
-      .brand {
-        display: inline-flex;
-        gap: 12px;
-        align-items: center;
-        font-weight: 750;
-        letter-spacing: -0.02em;
-        text-decoration: none;
-      }
-
-      .brand-mark {
-        display: grid;
-        width: 34px;
-        height: 34px;
-        place-items: center;
-        border: 1px solid rgba(255, 255, 255, 0.22);
-        border-radius: 11px;
-        background: linear-gradient(135deg, var(--accent), #4f46e5);
-        box-shadow: 0 8px 28px rgba(99, 88, 238, 0.35);
-      }
-
-      nav {
-        display: flex;
-        gap: 26px;
-      }
-
-      nav a {
-        color: var(--muted);
-        font-size: 0.92rem;
-        text-decoration: none;
-        transition: color 160ms ease;
-      }
-
-      nav a:hover,
-      nav a:focus-visible {
-        color: var(--text);
-      }
-
-      .hero {
-        display: grid;
-        min-height: 620px;
-        place-items: center;
-        padding: 80px 0 110px;
-        text-align: center;
-      }
-
-      .hero-inner {
-        max-width: 850px;
-      }
-
-      .eyebrow {
-        display: inline-flex;
-        gap: 8px;
-        align-items: center;
-        padding: 8px 13px;
-        margin-bottom: 24px;
-        border: 1px solid var(--panel-border);
-        border-radius: 999px;
-        color: #d7d9e5;
-        background: rgba(255, 255, 255, 0.045);
-        font-size: 0.82rem;
-      }
-
-      .status-dot {
-        width: 7px;
-        height: 7px;
-        border-radius: 50%;
-        background: var(--accent-soft);
-        box-shadow: 0 0 14px var(--accent-soft);
-      }
-
-      h1 {
-        margin: 0;
-        font-size: clamp(3rem, 9vw, 6.8rem);
-        font-weight: 800;
-        line-height: 0.96;
-        letter-spacing: -0.075em;
-      }
-
-      h1 span {
-        display: block;
-        padding-right: 0.06em;
-        color: transparent;
-        background: linear-gradient(100deg, #ffffff 20%, #b4aaff 56%, #71e6d5);
-        background-clip: text;
-        -webkit-background-clip: text;
-      }
-
-      .hero-copy {
-        max-width: 650px;
-        margin: 30px auto 0;
-        color: var(--muted);
-        font-size: clamp(1rem, 2vw, 1.18rem);
-        line-height: 1.8;
-      }
-
-      .actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 13px;
-        justify-content: center;
-        margin-top: 36px;
-      }
-
-      .button {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 48px;
-        padding: 0 21px;
-        border: 1px solid var(--panel-border);
-        border-radius: 13px;
-        font-size: 0.94rem;
-        font-weight: 700;
-        text-decoration: none;
-        transition:
-          transform 160ms ease,
-          border-color 160ms ease,
-          background 160ms ease;
-      }
-
-      .button:hover {
-        transform: translateY(-2px);
-      }
-
-      .button-primary {
-        border-color: transparent;
-        color: #090b17;
-        background: #f7f7fb;
-      }
-
-      .button-secondary {
-        color: #e1e3ec;
-        background: rgba(255, 255, 255, 0.045);
-      }
-
-      .button-secondary:hover {
-        border-color: rgba(255, 255, 255, 0.25);
-        background: rgba(255, 255, 255, 0.075);
-      }
-
-      .features {
-        padding: 0 0 110px;
-        scroll-margin-top: 30px;
-      }
-
-      .section-heading {
-        max-width: 610px;
-        margin-bottom: 32px;
-      }
-
-      .section-heading p {
-        margin: 0 0 10px;
-        color: var(--accent-soft);
-        font-size: 0.78rem;
-        font-weight: 800;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-      }
-
-      h2 {
-        margin: 0;
-        font-size: clamp(1.8rem, 4vw, 3rem);
-        letter-spacing: -0.045em;
-      }
-
-      .card-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 16px;
-      }
-
-      .card {
-        min-height: 230px;
-        padding: 28px;
-        border: 1px solid var(--panel-border);
-        border-radius: 22px;
-        background: var(--panel);
-        box-shadow: inset 0 1px rgba(255, 255, 255, 0.04);
-        backdrop-filter: blur(18px);
-      }
-
-      .card-number {
-        display: grid;
-        width: 38px;
-        height: 38px;
-        margin-bottom: 46px;
-        place-items: center;
-        border-radius: 11px;
-        color: #d8d3ff;
-        background: rgba(139, 124, 255, 0.16);
-        font-size: 0.8rem;
-        font-weight: 800;
-      }
-
-      .card h3 {
-        margin: 0 0 9px;
-        font-size: 1.1rem;
-      }
-
-      .card p {
-        margin: 0;
-        color: var(--muted);
-        font-size: 0.92rem;
-        line-height: 1.7;
-      }
-
-      footer {
-        display: flex;
-        justify-content: space-between;
-        padding: 30px 0 42px;
-        border-top: 1px solid var(--panel-border);
-        color: #777f96;
-        font-size: 0.82rem;
-      }
-
-      @media (max-width: 760px) {
-        .shell {
-          width: min(calc(100% - 28px), var(--max-width));
-        }
-
-        nav {
-          display: none;
-        }
-
-        .hero {
-          min-height: 580px;
-          padding: 58px 0 90px;
-        }
-
-        h1 {
-          font-size: clamp(2.85rem, 14vw, 4.6rem);
-        }
-
-        .card-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .card {
-          min-height: auto;
-        }
-
-        .card-number {
-          margin-bottom: 30px;
-        }
-
-        footer {
-          gap: 10px;
-          flex-direction: column;
-        }
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        html {
-          scroll-behavior: auto;
-        }
-
-        .button,
-        nav a {
-          transition: none;
-        }
-      }
-    </style>
+    <title>Dr. Yuchi Shen — Architecture · Structure · Computation</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <header class="shell">
-      <a class="brand" href="#top" aria-label="TestSharedWorkSpace 首页">
-        <span class="brand-mark" aria-hidden="true">T</span>
-        <span>TestSharedWorkSpace</span>
-      </a>
-      <nav aria-label="主导航">
-        <a href="#about">关于空间</a>
-        <a href="https://github.com/YuchiSHEN/WorkSpaceGit">GitHub</a>
+    <a class="skip-link" href="#profile">Skip to content</a>
+
+    <header class="site-header">
+      <a class="monogram" href="#top" aria-label="Yuchi Shen, home">YS<span>◻</span></a>
+      <nav aria-label="Primary navigation">
+        <a href="#profile">Profile</a>
+        <a href="#research">Research</a>
+        <a href="#publications">Publications</a>
+        <a href="#developments">Developments</a>
       </nav>
+      <a class="header-contact" href="mailto:sycarchi@outlook.com">Contact ↗</a>
     </header>
 
     <main id="top">
-      <section class="hero shell" aria-labelledby="hero-title">
-        <div class="hero-inner">
-          <div class="eyebrow">
-            <span class="status-dot" aria-hidden="true"></span>
-            Shared workspace · Online
+      <section class="hero page-grid" aria-labelledby="hero-title">
+        <div class="hero-index" aria-hidden="true">
+          <span>CV / 2026</span>
+          <span>32.06° N<br />118.80° E</span>
+        </div>
+
+        <div class="hero-title-wrap">
+          <p class="kicker">Architecture · Structure · Computation</p>
+          <h1 id="hero-title"><span>Yuchi</span><span>SHEN</span></h1>
+          <p class="hero-role">Postdoc Fellow<br />Assistant Researcher</p>
+        </div>
+
+        <figure class="portrait-frame">
+          <img
+            src="assets/portrait.webp"
+            alt="Portrait of Dr. Yuchi Shen"
+            width="720"
+            height="809"
+          />
+          <figcaption>Dr. Yuchi Shen / Nanjing</figcaption>
+        </figure>
+
+        <div class="hero-institution">
+          <span class="rule-label">Current position</span>
+          <p>School of Architecture<br />Southeast University</p>
+        </div>
+      </section>
+
+      <section class="contact-strip" aria-label="Contact details">
+        <dl>
+          <div>
+            <dt>Email</dt>
+            <dd><a href="mailto:sycarchi@outlook.com">sycarchi@outlook.com</a></dd>
           </div>
-          <h1 id="hero-title"><span>TestShared</span>WorkSpace</h1>
-          <p class="hero-copy">
-            一个用于协作、分享与持续创造的在线空间。这里将汇集项目、想法与共同完成的成果。
+          <div>
+            <dt>Phone</dt>
+            <dd><a href="tel:+86150105171566">+86 150 1051 71566</a></dd>
+          </div>
+          <div>
+            <dt>Born</dt>
+            <dd>30 Sep 1990</dd>
+          </div>
+          <div>
+            <dt>Address</dt>
+            <dd>Sipailou 2#, Southeast University<br />Nanjing, China</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="content-section page-grid" id="profile">
+        <div class="section-marker">
+          <span>01</span>
+          <h2>Profile</h2>
+        </div>
+        <div class="section-content profile-intro">
+          <p class="lead">
+            Computational methods for architectural–structural integration, translating rigorous
+            algorithms into tools that support real design decision-making.
           </p>
-          <div class="actions">
-            <a class="button button-primary" href="#about">探索空间</a>
-            <a
-              class="button button-secondary"
-              href="https://github.com/YuchiSHEN/WorkSpaceGit"
-              rel="noreferrer"
-            >查看源代码 ↗</a>
+          <p>
+            Yuchi Shen received his PhD from Southeast University and completed joint PhD training
+            at ETH Zürich, establishing long-term collaboration across architecture, engineering,
+            and computation.
+          </p>
+        </div>
+      </section>
+
+      <section class="content-section page-grid" id="education">
+        <div class="section-marker">
+          <span>02</span>
+          <h2>Education</h2>
+        </div>
+        <div class="section-content timeline">
+          <article>
+            <time>2016—2021</time>
+            <div>
+              <h3>PhD in Architecture</h3>
+              <p>Southeast University, China</p>
+              <small>September 2016 — December 2021</small>
+            </div>
+          </article>
+          <article>
+            <time>2019—2020</time>
+            <div>
+              <h3>Joint PhD Student in Architecture</h3>
+              <p>ETH Zürich, Switzerland</p>
+              <small>September 2019 — September 2020</small>
+            </div>
+          </article>
+          <article>
+            <time>2013—2016</time>
+            <div>
+              <h3>Master of Architecture</h3>
+              <p>Southeast University, China</p>
+              <small>September 2013 — June 2016</small>
+            </div>
+          </article>
+          <article>
+            <time>—</time>
+            <div>
+              <h3>Bachelor</h3>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="content-section page-grid" id="experience">
+        <div class="section-marker">
+          <span>03</span>
+          <h2>Experience</h2>
+        </div>
+        <div class="section-content feature-row">
+          <time>2022—Present</time>
+          <div>
+            <p class="eyebrow">Postdoctoral experience</p>
+            <h3>Postdoctoral Researcher</h3>
+            <p>Southeast University, China</p>
+            <small>February 2022 — Present</small>
           </div>
         </div>
       </section>
 
-      <section class="features shell" id="about" aria-labelledby="about-title">
-        <div class="section-heading">
-          <p>Built to evolve</p>
-          <h2 id="about-title">从一个简单页面开始</h2>
+      <section class="content-section page-grid" id="research">
+        <div class="section-marker">
+          <span>04</span>
+          <h2>Funded research</h2>
         </div>
-        <div class="card-grid">
-          <article class="card">
-            <div class="card-number">01</div>
-            <h3>共享项目</h3>
-            <p>集中展示正在推进的项目，让进度、成果与下一步保持清晰。</p>
+        <div class="section-content project-list">
+          <article>
+            <span class="project-code">NSFC / 52208010</span>
+            <div>
+              <p class="eyebrow">Principal Investigator</p>
+              <h3>Digital “Architecture–Structure” Interactive Design</h3>
+              <p>
+                National Natural Science Foundation of China, Youth Science Fund Project.
+                <em>Research on Digital “Architecture–Structure” Interactive Design Methods Based
+                on Dynamically Adapted Reused Components.</em>
+              </p>
+              <p class="meta">Jan 2023 — Dec 2025 · Funding ¥300,000</p>
+            </div>
           </article>
-          <article class="card">
-            <div class="card-number">02</div>
-            <h3>沉淀想法</h3>
-            <p>记录有价值的思考和资料，在持续迭代中形成可复用的知识。</p>
+          <article>
+            <span class="project-code">CPSF / 2025M771608</span>
+            <div>
+              <p class="eyebrow">Principal Investigator</p>
+              <h3>China Postdoctoral Science Foundation</h3>
+              <p>77th General Program.</p>
+            </div>
           </article>
-          <article class="card">
-            <div class="card-number">03</div>
-            <h3>开放协作</h3>
-            <p>基于 GitHub 管理内容和版本，为未来的共同创作保留空间。</p>
+          <article>
+            <span class="project-code">CPSF / 2022M720716</span>
+            <div>
+              <p class="eyebrow">Principal Investigator</p>
+              <h3>China Postdoctoral Science Foundation</h3>
+              <p>72nd General Program.</p>
+            </div>
           </article>
+          <article>
+            <span class="project-code">CPSF / 2024T170140</span>
+            <div>
+              <p class="eyebrow">Principal Investigator</p>
+              <h3>China Postdoctoral Science Foundation</h3>
+              <p>17th Special Fund.</p>
+            </div>
+          </article>
+          <article>
+            <span class="project-code">R&amp;D / 6301001087</span>
+            <div>
+              <p class="eyebrow">Subproject Lead</p>
+              <h3>Green-Performance Foundation Model</h3>
+              <p>
+                National Key R&amp;D Program of China. Research on a Green-Performance, Intelligent
+                Knowledge-Representation–Enhanced Foundation Model.
+              </p>
+            </div>
+          </article>
+          <article>
+            <span class="project-code">NSFC / 52394220</span>
+            <div>
+              <p class="eyebrow">Key Research Member</p>
+              <h3>Building Design Toward Carbon Neutrality</h3>
+              <p>
+                NSFC Major Program. Task 4: <em>Prototype Construction of Carbon-Neutral Building
+                Technologies in High-Density Urban Environments.</em> Grant No. 52394224.
+              </p>
+            </div>
+          </article>
+          <article>
+            <span class="project-code">CAE × NSFC</span>
+            <div>
+              <p class="eyebrow">Research Assistant</p>
+              <h3>Green and Low-Carbon Urban Renewal</h3>
+              <p>
+                Chinese Academy of Engineering &amp; NSFC Joint Strategic Research Project.
+                <em>Strategic Research on the Development of a Green and Low-Carbon Urban Renewal
+                Technology System Toward 2040.</em>
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="content-section page-grid" id="publications">
+        <div class="section-marker">
+          <span>05</span>
+          <h2>Selected publications</h2>
+        </div>
+        <ol class="section-content publication-list">
+          <li>
+            <span>2025</span>
+            <p><strong>Shen, Y.</strong>, Wang, J.-G., Shen, X., &amp; Shi, Z. Form-finding and analyzing deployable folding structures through the synthesis of vector-based graphic statics and finite element method modelling. <em>Thin-Walled Structures.</em></p>
+          </li>
+          <li>
+            <span>2024</span>
+            <p><strong>Shen, Y.</strong>, Jasienski, J.-P., Ohlbrock, P.-O., &amp; D’Acunto, P. Computational form-finding of single-layer spatial structures: Constructing force diagrams with vector-based graphic statics and guiding trails. <em>Automation in Construction.</em></p>
+          </li>
+          <li>
+            <span>2024</span>
+            <p>Jasienski, J.-P., <strong>Shen, Y.</strong>, Ohlbrock, P.-O., Zastavni, D., &amp; D’Acunto, P. A computational implementation of vector-based 3D graphic statics (VGS) for interactive and real-time structural design. <em>Computer-Aided Design, 171</em>, Article 103695.</p>
+          </li>
+          <li>
+            <span>2024</span>
+            <p><strong>Shen, Y.</strong>, Hu, X., Wang, X., Zhang, M., Deng, L., &amp; Wang, W. Integrated framework for space- and energy-efficient retrofitting in multifunctional buildings: A synergy of agent-based modeling and performance-based modeling. <em>Building Simulation.</em></p>
+          </li>
+          <li>
+            <span>2025</span>
+            <p><strong>Shen, Y.</strong>, &amp; Wang, S.-Z. 因材赋形——数字图解静力学辅助下的建筑结构再利用设计研究 [Material-informed form: Building-structure reuse design aided by digital graphic statics]. <em>World Architecture (世界建筑)</em>, (2). [In Chinese]</p>
+          </li>
+          <li>
+            <span>2025</span>
+            <p><strong>Shen, Y.</strong>, Yang, M., Lin, Y.-L., &amp; Wang, W. 从微观设计到宏观能效——城市建筑立面空调设备遮挡的适应性整合策略 [From micro-scale design to macro-scale energy efficiency: An adaptive integration strategy for screening façade air-conditioning units]. <em>New Architecture (新建筑).</em> [In Chinese]</p>
+          </li>
+          <li>
+            <span>2025</span>
+            <p>Wang, J.-G., Sun, Y.-B., Yao, X.-Y., <strong>Shen, Y.</strong>, &amp; Xi, H.-Y. 地域建筑的文化传承与扬弃探新——大理书院建筑设计 [Cultural inheritance and critical adaptation in regional architecture: The architectural design of Dali Academy]. <em>Architectural Journal (建筑学报)</em>, (1). [In Chinese]</p>
+          </li>
+          <li>
+            <span>2025</span>
+            <p>Shi, Z.-Y., Dai, H., &amp; <strong>Shen, Y.-C.</strong> A new form-evolving approach for adaptive tree-like structures using feature region principal stress lines method. <em>Frontiers of Architectural Research.</em> <a href="https://doi.org/10.1016/j.foar.2025.03.008">doi:10.1016/j.foar.2025.03.008 ↗</a></p>
+          </li>
+          <li>
+            <span>2022</span>
+            <p><strong>Shen, Y.</strong>, Boller, G., &amp; D’Acunto, P. Interactive architectural structural conceptualization based on three-dimensional graphic statics. <em>Architectural Journal (建筑学报).</em></p>
+          </li>
+          <li>
+            <span>2021</span>
+            <p><strong>Shen, Y.</strong>, &amp; Wang, J. Digital structural morphology using vectorial graphic statics tools inspired by natural forms. <em>Architectural Journal (建筑学报).</em></p>
+          </li>
+          <li>
+            <span>2022</span>
+            <p><strong>Shen, Y.</strong>, &amp; Liu, Y. Bioinspired building structural conceptual design by graphic static and layout optimization: A case study of human femur structure. <em>Journal of Asian Architecture and Building Engineering.</em></p>
+          </li>
+        </ol>
+      </section>
+
+      <section class="content-section page-grid" id="awards">
+        <div class="section-marker">
+          <span>06</span>
+          <h2>Awards &amp; honors</h2>
+        </div>
+        <div class="section-content award-grid">
+          <article>
+            <span>2025</span>
+            <h3>Selected Fellow</h3>
+            <p>National Postdoctoral Program (国家资助博士后研究人员计划), Category C.</p>
+          </article>
+          <article>
+            <span>2025</span>
+            <h3>Second Prize · Rank 4</h3>
+            <p>National Excellent Engineering Survey &amp; Design Industry Awards — Dali Academy (大理书院).</p>
+          </article>
+          <article>
+            <span>2025</span>
+            <h3>Second Prize · Rank 6</h3>
+            <p>National Excellent Engineering Survey &amp; Design Industry Awards — Jiangsu Garden Expo (Phase I): Boutique Garden Building 1 (incl. hotel) (江苏园博园〔一期〕项目——精品园林建1〔含酒店〕).</p>
+          </article>
+          <article>
+            <span>2022</span>
+            <h3>Outstanding Doctoral Post Program</h3>
+            <p>Jiangsu Province (江苏省卓越博士后).</p>
+          </article>
+          <article>
+            <span>2019</span>
+            <h3>First Prize</h3>
+            <p>China “Yi Xiang” (Yunnan Chuxiong) Residential Design Competition, awarded by the Yunnan Provincial Department of Housing and Urban–Rural Development.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="content-section page-grid" id="activities">
+        <div class="section-marker">
+          <span>07</span>
+          <h2>Affiliations &amp; activities</h2>
+        </div>
+        <div class="section-content activity-list">
+          <article>
+            <time>Sep 2021</time>
+            <p><strong>Participant</strong> — <em>International fib Symposium on the Conceptual Design of Structures</em>, Switzerland.</p>
+          </article>
+          <article>
+            <time>Sep 2022</time>
+            <p><strong>Participant</strong> — <em>IASS 2022 Symposium</em> (affiliated with APCS 2022), Beijing, China.</p>
+          </article>
+          <article>
+            <time>Aug 2024</time>
+            <p><strong>Participant</strong> — <em>IASS 2024 Symposium</em> (affiliated with APCS 2024), Zürich, Switzerland.</p>
+          </article>
+          <article>
+            <time>2025</time>
+            <p><strong>Co-Instructor / Mentor</strong> — <em>International Summer Design Workshop 2025</em> (14 days). Supervised student projects; team received the Outstanding Award, and the proposal was advanced as a subsequent built scheme (as provided).</p>
+          </article>
+          <article>
+            <time>2025</time>
+            <p><strong>Co-Instructor / Mentor</strong> — <em>DigitalFuture 2025 Workshop, Deployable/Folding Structures Based on Vector-Based Graphic Statics</em>. Coached students in computational graphic-statics workflows and supported completion of a design-to-build project.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="developments" id="developments" aria-labelledby="developments-title">
+        <header class="developments-header page-grid">
+          <div class="section-marker light">
+            <span>08</span>
+            <h2 id="developments-title">Developments</h2>
+          </div>
+          <p>Research translated into computational design tools.</p>
+        </header>
+
+        <article class="development-card">
+          <a href="https://www.food4rhino.com/en/app/bsim?lang=en" aria-label="Open BSim project">
+            <img src="assets/bsim.webp" alt="BSim agent-based modelling tool interface" width="1800" height="817" loading="lazy" />
+            <div>
+              <span>01 / Agent-based modelling</span>
+              <h3>BSim</h3>
+              <p>Agent-based simulation linking spatial behavior and performance-based modelling.</p>
+              <b>View project ↗</b>
+            </div>
+          </a>
+        </article>
+
+        <article class="development-card reverse">
+          <a href="https://github.com/YuchiSHEN/ADRFR" aria-label="Open ADRFR project">
+            <img src="assets/adrfr.webp" alt="ADRFR form-finding tool structural model" width="1800" height="1318" loading="lazy" />
+            <div>
+              <span>02 / Equilibrium computation</span>
+              <h3>ADRFR</h3>
+              <p>Alternative Directional Residual Reduction method and solver for discrete network structures.</p>
+              <b>View repository ↗</b>
+            </div>
+          </a>
+        </article>
+
+        <article class="development-card">
+          <a href="https://github.com/computational-structural-design/VGS" aria-label="Open VGS project">
+            <img src="assets/vgs.webp" alt="Vector-based Graphic Statics tool interface" width="1800" height="710" loading="lazy" />
+            <div>
+              <span>03 / Graphic statics</span>
+              <h3>VGS</h3>
+              <p>Interactive force–form exploration for early-stage architectural structural design.</p>
+              <b>View repository ↗</b>
+            </div>
+          </a>
+        </article>
+      </section>
+
+      <section class="content-section statement page-grid" id="statement">
+        <div class="section-marker">
+          <span>09</span>
+          <h2>Personal statement</h2>
+        </div>
+        <div class="section-content statement-copy">
+          <p>
+            I am applying to join the Young Editorial Board of Architectural Intelligence. My
+            research focuses on computational methods for architectural–structural integration,
+            aiming to translate rigorous algorithms into tools that can support real design
+            decision-making. I received my PhD from Southeast University and completed joint PhD
+            training at ETH Zürich (2019–2020), which established long-term collaboration across
+            architecture, engineering, and computation.
+          </p>
+          <p>
+            On the technical side, I am a principal developer of the Vector-based Graphic Statics
+            (VGS) toolchain (in collaboration with UCLeuven), enabling interactive force–form
+            exploration for early-stage structural design. I also led the development of the
+            Alternative Directional Residual Reduction (ADRR) method and solver for equilibrium
+            computation of discrete network structures, and developed BSim, an agent-based
+            simulation platform linking spatial behavior and performance-based modeling. These
+            efforts have resulted in peer-reviewed publications in journals such as Automation in
+            Construction, Computer-Aided Design, Building Simulation, and Thin-Walled Structures.
+          </p>
+          <p>
+            I have served as a reviewer for leading journals including Automation in Construction
+            and Computer-Aided Design, which has strengthened my ability to assess methodological
+            rigor, novelty, and clarity for interdisciplinary audiences. As a Young Editorial Board
+            member, I would contribute by providing timely and constructive reviews, supporting
+            special issues around reproducible computational workflows and design intelligence,
+            and helping the journal further connect advanced research with architectural practice.
+          </p>
+          <img class="signature" src="assets/signature.webp" alt="Yuchi Shen signature" width="900" height="174" loading="lazy" />
         </div>
       </section>
     </main>
 
-    <footer class="shell">
-      <span>© 2026 TestSharedWorkSpace</span>
-      <span>Hosted with GitHub Pages</span>
+    <footer class="site-footer page-grid">
+      <p>Dr. Yuchi Shen<br />Architecture · Structure · Computation</p>
+      <p>Curriculum Vitae<br />Last updated from source document: 2026</p>
+      <a href="#top">Back to top ↑</a>
     </footer>
   </body>
 </html>

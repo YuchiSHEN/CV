@@ -1,17 +1,15 @@
-# TestSharedWorkSpace
+# Yuchi Shen — Academic CV
 
-一个用于协作、分享与持续创造的在线工作空间。
+A responsive architecture-style academic CV for Dr. Yuchi Shen, published with GitHub Pages.
 
-## 本地预览
-
-这是一个无构建依赖的静态网页，可直接打开 `index.html`，或在仓库目录运行：
+## Local preview
 
 ```powershell
 python -m http.server 8000
 ```
 
-然后访问 <http://localhost:8000>。
+Then open <http://localhost:8000>.
 
-## 在线地址
+## Live site
 
 <https://yuchishen.github.io/WorkSpaceGit/>
