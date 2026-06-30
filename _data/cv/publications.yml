@@ -1,0 +1,58 @@
+section:
+  number: "05"
+  title: Selected publications
+items:
+  - year: "2025"
+    citation: >-
+      **Shen, Y.**, Wang, J.-G., Shen, X., & Shi, Z. Form-finding and analyzing deployable
+      folding structures through the synthesis of vector-based graphic statics and finite
+      element method modelling. *Thin-Walled Structures.*
+  - year: "2024"
+    citation: >-
+      **Shen, Y.**, Jasienski, J.-P., Ohlbrock, P.-O., & D’Acunto, P. Computational
+      form-finding of single-layer spatial structures: Constructing force diagrams with
+      vector-based graphic statics and guiding trails. *Automation in Construction.*
+  - year: "2024"
+    citation: >-
+      Jasienski, J.-P., **Shen, Y.**, Ohlbrock, P.-O., Zastavni, D., & D’Acunto, P.
+      A computational implementation of vector-based 3D graphic statics (VGS) for interactive
+      and real-time structural design. *Computer-Aided Design, 171*, Article 103695.
+  - year: "2024"
+    citation: >-
+      **Shen, Y.**, Hu, X., Wang, X., Zhang, M., Deng, L., & Wang, W. Integrated framework
+      for space- and energy-efficient retrofitting in multifunctional buildings: A synergy of
+      agent-based modeling and performance-based modeling. *Building Simulation.*
+  - year: "2025"
+    citation: >-
+      **Shen, Y.**, & Wang, S.-Z. 因材赋形——数字图解静力学辅助下的建筑结构再利用设计研究
+      [Material-informed form: Building-structure reuse design aided by digital graphic statics].
+      *World Architecture (世界建筑)*, (2). [In Chinese]
+  - year: "2025"
+    citation: >-
+      **Shen, Y.**, Yang, M., Lin, Y.-L., & Wang, W. 从微观设计到宏观能效——城市建筑立面空调设备
+      遮挡的适应性整合策略 [From micro-scale design to macro-scale energy efficiency: An adaptive
+      integration strategy for screening façade air-conditioning units]. *New Architecture (新建筑).*
+      [In Chinese]
+  - year: "2025"
+    citation: >-
+      Wang, J.-G., Sun, Y.-B., Yao, X.-Y., **Shen, Y.**, & Xi, H.-Y. 地域建筑的文化传承与扬弃探新
+      ——大理书院建筑设计 [Cultural inheritance and critical adaptation in regional architecture:
+      The architectural design of Dali Academy]. *Architectural Journal (建筑学报)*, (1). [In Chinese]
+  - year: "2025"
+    citation: >-
+      Shi, Z.-Y., Dai, H., & **Shen, Y.-C.** A new form-evolving approach for adaptive tree-like
+      structures using feature region principal stress lines method. *Frontiers of Architectural
+      Research.* [doi:10.1016/j.foar.2025.03.008](https://doi.org/10.1016/j.foar.2025.03.008)
+  - year: "2022"
+    citation: >-
+      **Shen, Y.**, Boller, G., & D’Acunto, P. Interactive architectural structural conceptualization
+      based on three-dimensional graphic statics. *Architectural Journal (建筑学报).*
+  - year: "2021"
+    citation: >-
+      **Shen, Y.**, & Wang, J. Digital structural morphology using vectorial graphic statics tools
+      inspired by natural forms. *Architectural Journal (建筑学报).*
+  - year: "2022"
+    citation: >-
+      **Shen, Y.**, & Liu, Y. Bioinspired building structural conceptual design by graphic static
+      and layout optimization: A case study of human femur structure. *Journal of Asian Architecture
+      and Building Engineering.*

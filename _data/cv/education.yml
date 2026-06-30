@@ -1,0 +1,18 @@
+section:
+  number: "02"
+  title: Education
+items:
+  - period: "2016—2021"
+    degree: PhD in Architecture
+    institution: Southeast University, China
+    dates: September 2016 — December 2021
+  - period: "2019—2020"
+    degree: Joint PhD Student in Architecture
+    institution: ETH Zürich, Switzerland
+    dates: September 2019 — September 2020
+  - period: "2013—2016"
+    degree: Master of Architecture
+    institution: Southeast University, China
+    dates: September 2013 — June 2016
+  - period: "—"
+    degree: Bachelor

@@ -1,76 +1,83 @@
+---
+layout: null
+---
+{% assign profile = site.data.cv.profile %}
+{% assign education = site.data.cv.education %}
+{% assign experience = site.data.cv.experience %}
+{% assign research = site.data.cv.research %}
+{% assign publications = site.data.cv.publications %}
+{% assign awards = site.data.cv.awards %}
+{% assign activities = site.data.cv.activities %}
+{% assign developments = site.data.cv.developments %}
+{% assign statement = site.data.cv.statement %}
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
-      name="description"
-      content="Academic CV of Dr. Yuchi Shen — architecture, structural design, and computation."
-    />
-    <title>Dr. Yuchi Shen — Architecture · Structure · Computation</title>
-    <link rel="stylesheet" href="styles.css" />
+    <meta name="description" content="{{ profile.seo_description | escape }}" />
+    <title>{{ profile.seo_title | escape }}</title>
+    <link rel="stylesheet" href="{{ 'styles.css' | relative_url }}" />
   </head>
   <body>
     <a class="skip-link" href="#profile">Skip to content</a>
 
     <header class="site-header">
-      <a class="monogram" href="#top" aria-label="Yuchi Shen, home">YS<span>◻</span></a>
+      <a class="monogram" href="#top" aria-label="{{ profile.display_name | escape }}, home">YS<span>◻</span></a>
       <nav aria-label="Primary navigation">
-        <a href="#profile">Profile</a>
-        <a href="#research">Research</a>
-        <a href="#publications">Publications</a>
-        <a href="#developments">Developments</a>
+        {% for item in profile.navigation %}
+          <a href="{{ item.href }}">{{ item.label | escape }}</a>
+        {% endfor %}
       </nav>
-      <a class="header-contact" href="mailto:sycarchi@outlook.com">Contact ↗</a>
+      <a class="header-contact" href="{{ profile.contact[0].href }}">Contact ↗</a>
     </header>
 
     <main id="top">
       <section class="hero page-grid" aria-labelledby="hero-title">
         <div class="hero-index" aria-hidden="true">
-          <span>CV / 2026</span>
-          <span>32.06° N<br />118.80° E</span>
+          <span>CV / {{ site.time | date: '%Y' }}</span>
+          <span>{{ profile.coordinates[0] }}<br />{{ profile.coordinates[1] }}</span>
         </div>
 
         <div class="hero-title-wrap">
-          <p class="kicker">Architecture · Structure · Computation</p>
-          <h1 id="hero-title"><span>Yuchi</span><span>SHEN</span></h1>
-          <p class="hero-role">Postdoc Fellow<br />Assistant Researcher</p>
+          <p class="kicker">{{ profile.discipline | escape }}</p>
+          <h1 id="hero-title">
+            <span>{{ profile.name.given | escape }}</span><span>{{ profile.name.family | escape }}</span>
+          </h1>
+          <p class="hero-role">
+            {% for role in profile.role %}{{ role | escape }}{% unless forloop.last %}<br />{% endunless %}{% endfor %}
+          </p>
         </div>
 
         <figure class="portrait-frame">
           <img
-            src="assets/portrait.webp"
-            alt="Portrait of Dr. Yuchi Shen"
-            width="720"
-            height="809"
+            src="{{ profile.photo | relative_url }}"
+            alt="{{ profile.photo_alt | escape }}"
+            width="766"
+            height="786"
           />
-          <figcaption>Dr. Yuchi Shen / Nanjing</figcaption>
+          <figcaption>{{ profile.display_name | escape }} / {{ profile.location | escape }}</figcaption>
         </figure>
 
         <div class="hero-institution">
           <span class="rule-label">Current position</span>
-          <p>School of Architecture<br />Southeast University</p>
+          <p>
+            {% for line in profile.institution %}{{ line | escape }}{% unless forloop.last %}<br />{% endunless %}{% endfor %}
+          </p>
         </div>
       </section>
 
       <section class="contact-strip" aria-label="Contact details">
         <dl>
-          <div>
-            <dt>Email</dt>
-            <dd><a href="mailto:sycarchi@outlook.com">sycarchi@outlook.com</a></dd>
-          </div>
-          <div>
-            <dt>Phone</dt>
-            <dd><a href="tel:+86150105171566">+86 150 1051 71566</a></dd>
-          </div>
-          <div>
-            <dt>Born</dt>
-            <dd>30 Sep 1990</dd>
-          </div>
-          <div>
-            <dt>Address</dt>
-            <dd>Sipailou 2#, Southeast University<br />Nanjing, China</dd>
-          </div>
+          {% for item in profile.contact %}
+            <div>
+              <dt>{{ item.label | escape }}</dt>
+              <dd>
+                {% if item.href %}<a href="{{ item.href }}">{% endif %}{{ item.value | escape }}{% if item.href %}</a>{% endif %}
+                {% if item.secondary %}<br />{{ item.secondary | escape }}{% endif %}
+              </dd>
+            </div>
+          {% endfor %}
         </dl>
       </section>
 
@@ -80,355 +87,166 @@
           <h2>Profile</h2>
         </div>
         <div class="section-content profile-intro">
-          <p class="lead">
-            Computational methods for architectural–structural integration, translating rigorous
-            algorithms into tools that support real design decision-making.
-          </p>
-          <p>
-            Yuchi Shen received his PhD from Southeast University and completed joint PhD training
-            at ETH Zürich, establishing long-term collaboration across architecture, engineering,
-            and computation.
-          </p>
+          <p class="lead">{{ profile.intro.lead | escape }}</p>
+          <p>{{ profile.intro.body | escape }}</p>
         </div>
       </section>
 
       <section class="content-section page-grid" id="education">
         <div class="section-marker">
-          <span>02</span>
-          <h2>Education</h2>
+          <span>{{ education.section.number }}</span>
+          <h2>{{ education.section.title | escape }}</h2>
         </div>
         <div class="section-content timeline">
-          <article>
-            <time>2016—2021</time>
-            <div>
-              <h3>PhD in Architecture</h3>
-              <p>Southeast University, China</p>
-              <small>September 2016 — December 2021</small>
-            </div>
-          </article>
-          <article>
-            <time>2019—2020</time>
-            <div>
-              <h3>Joint PhD Student in Architecture</h3>
-              <p>ETH Zürich, Switzerland</p>
-              <small>September 2019 — September 2020</small>
-            </div>
-          </article>
-          <article>
-            <time>2013—2016</time>
-            <div>
-              <h3>Master of Architecture</h3>
-              <p>Southeast University, China</p>
-              <small>September 2013 — June 2016</small>
-            </div>
-          </article>
-          <article>
-            <time>—</time>
-            <div>
-              <h3>Bachelor</h3>
-            </div>
-          </article>
+          {% for item in education.items %}
+            <article>
+              <time>{{ item.period | escape }}</time>
+              <div>
+                <h3>{{ item.degree | escape }}</h3>
+                {% if item.institution %}<p>{{ item.institution | escape }}</p>{% endif %}
+                {% if item.dates %}<small>{{ item.dates | escape }}</small>{% endif %}
+              </div>
+            </article>
+          {% endfor %}
         </div>
       </section>
 
       <section class="content-section page-grid" id="experience">
         <div class="section-marker">
-          <span>03</span>
-          <h2>Experience</h2>
+          <span>{{ experience.section.number }}</span>
+          <h2>{{ experience.section.title | escape }}</h2>
         </div>
-        <div class="section-content feature-row">
-          <time>2022—Present</time>
-          <div>
-            <p class="eyebrow">Postdoctoral experience</p>
-            <h3>Postdoctoral Researcher</h3>
-            <p>Southeast University, China</p>
-            <small>February 2022 — Present</small>
+        {% for item in experience.items %}
+          <div class="section-content feature-row">
+            <time>{{ item.period | escape }}</time>
+            <div>
+              <p class="eyebrow">{{ item.category | escape }}</p>
+              <h3>{{ item.role | escape }}</h3>
+              <p>{{ item.institution | escape }}</p>
+              <small>{{ item.dates | escape }}</small>
+            </div>
           </div>
-        </div>
+        {% endfor %}
       </section>
 
       <section class="content-section page-grid" id="research">
         <div class="section-marker">
-          <span>04</span>
-          <h2>Funded research</h2>
+          <span>{{ research.section.number }}</span>
+          <h2>{{ research.section.title | escape }}</h2>
         </div>
         <div class="section-content project-list">
-          <article>
-            <span class="project-code">NSFC / 52208010</span>
-            <div>
-              <p class="eyebrow">Principal Investigator</p>
-              <h3>Digital “Architecture–Structure” Interactive Design</h3>
-              <p>
-                National Natural Science Foundation of China, Youth Science Fund Project.
-                <em>Research on Digital “Architecture–Structure” Interactive Design Methods Based
-                on Dynamically Adapted Reused Components.</em>
-              </p>
-              <p class="meta">Jan 2023 — Dec 2025 · Funding ¥300,000</p>
-            </div>
-          </article>
-          <article>
-            <span class="project-code">CPSF / 2025M771608</span>
-            <div>
-              <p class="eyebrow">Principal Investigator</p>
-              <h3>China Postdoctoral Science Foundation</h3>
-              <p>77th General Program.</p>
-            </div>
-          </article>
-          <article>
-            <span class="project-code">CPSF / 2022M720716</span>
-            <div>
-              <p class="eyebrow">Principal Investigator</p>
-              <h3>China Postdoctoral Science Foundation</h3>
-              <p>72nd General Program.</p>
-            </div>
-          </article>
-          <article>
-            <span class="project-code">CPSF / 2024T170140</span>
-            <div>
-              <p class="eyebrow">Principal Investigator</p>
-              <h3>China Postdoctoral Science Foundation</h3>
-              <p>17th Special Fund.</p>
-            </div>
-          </article>
-          <article>
-            <span class="project-code">R&amp;D / 6301001087</span>
-            <div>
-              <p class="eyebrow">Subproject Lead</p>
-              <h3>Green-Performance Foundation Model</h3>
-              <p>
-                National Key R&amp;D Program of China. Research on a Green-Performance, Intelligent
-                Knowledge-Representation–Enhanced Foundation Model.
-              </p>
-            </div>
-          </article>
-          <article>
-            <span class="project-code">NSFC / 52394220</span>
-            <div>
-              <p class="eyebrow">Key Research Member</p>
-              <h3>Building Design Toward Carbon Neutrality</h3>
-              <p>
-                NSFC Major Program. Task 4: <em>Prototype Construction of Carbon-Neutral Building
-                Technologies in High-Density Urban Environments.</em> Grant No. 52394224.
-              </p>
-            </div>
-          </article>
-          <article>
-            <span class="project-code">CAE × NSFC</span>
-            <div>
-              <p class="eyebrow">Research Assistant</p>
-              <h3>Green and Low-Carbon Urban Renewal</h3>
-              <p>
-                Chinese Academy of Engineering &amp; NSFC Joint Strategic Research Project.
-                <em>Strategic Research on the Development of a Green and Low-Carbon Urban Renewal
-                Technology System Toward 2040.</em>
-              </p>
-            </div>
-          </article>
+          {% for item in research.items %}
+            <article>
+              <span class="project-code">{{ item.code | escape }}</span>
+              <div>
+                <p class="eyebrow">{{ item.role | escape }}</p>
+                <h3>{{ item.title | escape }}</h3>
+                <div class="markdown-copy">{{ item.description | markdownify }}</div>
+                {% if item.meta %}<p class="meta">{{ item.meta | escape }}</p>{% endif %}
+              </div>
+            </article>
+          {% endfor %}
         </div>
       </section>
 
       <section class="content-section page-grid" id="publications">
         <div class="section-marker">
-          <span>05</span>
-          <h2>Selected publications</h2>
+          <span>{{ publications.section.number }}</span>
+          <h2>{{ publications.section.title | escape }}</h2>
         </div>
         <ol class="section-content publication-list">
-          <li>
-            <span>2025</span>
-            <p><strong>Shen, Y.</strong>, Wang, J.-G., Shen, X., &amp; Shi, Z. Form-finding and analyzing deployable folding structures through the synthesis of vector-based graphic statics and finite element method modelling. <em>Thin-Walled Structures.</em></p>
-          </li>
-          <li>
-            <span>2024</span>
-            <p><strong>Shen, Y.</strong>, Jasienski, J.-P., Ohlbrock, P.-O., &amp; D’Acunto, P. Computational form-finding of single-layer spatial structures: Constructing force diagrams with vector-based graphic statics and guiding trails. <em>Automation in Construction.</em></p>
-          </li>
-          <li>
-            <span>2024</span>
-            <p>Jasienski, J.-P., <strong>Shen, Y.</strong>, Ohlbrock, P.-O., Zastavni, D., &amp; D’Acunto, P. A computational implementation of vector-based 3D graphic statics (VGS) for interactive and real-time structural design. <em>Computer-Aided Design, 171</em>, Article 103695.</p>
-          </li>
-          <li>
-            <span>2024</span>
-            <p><strong>Shen, Y.</strong>, Hu, X., Wang, X., Zhang, M., Deng, L., &amp; Wang, W. Integrated framework for space- and energy-efficient retrofitting in multifunctional buildings: A synergy of agent-based modeling and performance-based modeling. <em>Building Simulation.</em></p>
-          </li>
-          <li>
-            <span>2025</span>
-            <p><strong>Shen, Y.</strong>, &amp; Wang, S.-Z. 因材赋形——数字图解静力学辅助下的建筑结构再利用设计研究 [Material-informed form: Building-structure reuse design aided by digital graphic statics]. <em>World Architecture (世界建筑)</em>, (2). [In Chinese]</p>
-          </li>
-          <li>
-            <span>2025</span>
-            <p><strong>Shen, Y.</strong>, Yang, M., Lin, Y.-L., &amp; Wang, W. 从微观设计到宏观能效——城市建筑立面空调设备遮挡的适应性整合策略 [From micro-scale design to macro-scale energy efficiency: An adaptive integration strategy for screening façade air-conditioning units]. <em>New Architecture (新建筑).</em> [In Chinese]</p>
-          </li>
-          <li>
-            <span>2025</span>
-            <p>Wang, J.-G., Sun, Y.-B., Yao, X.-Y., <strong>Shen, Y.</strong>, &amp; Xi, H.-Y. 地域建筑的文化传承与扬弃探新——大理书院建筑设计 [Cultural inheritance and critical adaptation in regional architecture: The architectural design of Dali Academy]. <em>Architectural Journal (建筑学报)</em>, (1). [In Chinese]</p>
-          </li>
-          <li>
-            <span>2025</span>
-            <p>Shi, Z.-Y., Dai, H., &amp; <strong>Shen, Y.-C.</strong> A new form-evolving approach for adaptive tree-like structures using feature region principal stress lines method. <em>Frontiers of Architectural Research.</em> <a href="https://doi.org/10.1016/j.foar.2025.03.008">doi:10.1016/j.foar.2025.03.008 ↗</a></p>
-          </li>
-          <li>
-            <span>2022</span>
-            <p><strong>Shen, Y.</strong>, Boller, G., &amp; D’Acunto, P. Interactive architectural structural conceptualization based on three-dimensional graphic statics. <em>Architectural Journal (建筑学报).</em></p>
-          </li>
-          <li>
-            <span>2021</span>
-            <p><strong>Shen, Y.</strong>, &amp; Wang, J. Digital structural morphology using vectorial graphic statics tools inspired by natural forms. <em>Architectural Journal (建筑学报).</em></p>
-          </li>
-          <li>
-            <span>2022</span>
-            <p><strong>Shen, Y.</strong>, &amp; Liu, Y. Bioinspired building structural conceptual design by graphic static and layout optimization: A case study of human femur structure. <em>Journal of Asian Architecture and Building Engineering.</em></p>
-          </li>
+          {% for item in publications.items %}
+            <li>
+              <span>{{ item.year | escape }}</span>
+              {{ item.citation | markdownify }}
+            </li>
+          {% endfor %}
         </ol>
       </section>
 
       <section class="content-section page-grid" id="awards">
         <div class="section-marker">
-          <span>06</span>
-          <h2>Awards &amp; honors</h2>
+          <span>{{ awards.section.number }}</span>
+          <h2>{{ awards.section.title | escape }}</h2>
         </div>
         <div class="section-content award-grid">
-          <article>
-            <span>2025</span>
-            <h3>Selected Fellow</h3>
-            <p>National Postdoctoral Program (国家资助博士后研究人员计划), Category C.</p>
-          </article>
-          <article>
-            <span>2025</span>
-            <h3>Second Prize · Rank 4</h3>
-            <p>National Excellent Engineering Survey &amp; Design Industry Awards — Dali Academy (大理书院).</p>
-          </article>
-          <article>
-            <span>2025</span>
-            <h3>Second Prize · Rank 6</h3>
-            <p>National Excellent Engineering Survey &amp; Design Industry Awards — Jiangsu Garden Expo (Phase I): Boutique Garden Building 1 (incl. hotel) (江苏园博园〔一期〕项目——精品园林建1〔含酒店〕).</p>
-          </article>
-          <article>
-            <span>2022</span>
-            <h3>Outstanding Doctoral Post Program</h3>
-            <p>Jiangsu Province (江苏省卓越博士后).</p>
-          </article>
-          <article>
-            <span>2019</span>
-            <h3>First Prize</h3>
-            <p>China “Yi Xiang” (Yunnan Chuxiong) Residential Design Competition, awarded by the Yunnan Provincial Department of Housing and Urban–Rural Development.</p>
-          </article>
+          {% for item in awards.items %}
+            <article>
+              <span>{{ item.year | escape }}</span>
+              <h3>{{ item.title | escape }}</h3>
+              <p>{{ item.description | escape }}</p>
+            </article>
+          {% endfor %}
         </div>
       </section>
 
       <section class="content-section page-grid" id="activities">
         <div class="section-marker">
-          <span>07</span>
-          <h2>Affiliations &amp; activities</h2>
+          <span>{{ activities.section.number }}</span>
+          <h2>{{ activities.section.title | escape }}</h2>
         </div>
         <div class="section-content activity-list">
-          <article>
-            <time>Sep 2021</time>
-            <p><strong>Participant</strong> — <em>International fib Symposium on the Conceptual Design of Structures</em>, Switzerland.</p>
-          </article>
-          <article>
-            <time>Sep 2022</time>
-            <p><strong>Participant</strong> — <em>IASS 2022 Symposium</em> (affiliated with APCS 2022), Beijing, China.</p>
-          </article>
-          <article>
-            <time>Aug 2024</time>
-            <p><strong>Participant</strong> — <em>IASS 2024 Symposium</em> (affiliated with APCS 2024), Zürich, Switzerland.</p>
-          </article>
-          <article>
-            <time>2025</time>
-            <p><strong>Co-Instructor / Mentor</strong> — <em>International Summer Design Workshop 2025</em> (14 days). Supervised student projects; team received the Outstanding Award, and the proposal was advanced as a subsequent built scheme (as provided).</p>
-          </article>
-          <article>
-            <time>2025</time>
-            <p><strong>Co-Instructor / Mentor</strong> — <em>DigitalFuture 2025 Workshop, Deployable/Folding Structures Based on Vector-Based Graphic Statics</em>. Coached students in computational graphic-statics workflows and supported completion of a design-to-build project.</p>
-          </article>
+          {% for item in activities.items %}
+            <article>
+              <time>{{ item.date | escape }}</time>
+              {{ item.text | markdownify }}
+            </article>
+          {% endfor %}
         </div>
       </section>
 
       <section class="developments" id="developments" aria-labelledby="developments-title">
         <header class="developments-header page-grid">
           <div class="section-marker light">
-            <span>08</span>
-            <h2 id="developments-title">Developments</h2>
+            <span>{{ developments.section.number }}</span>
+            <h2 id="developments-title">{{ developments.section.title | escape }}</h2>
           </div>
-          <p>Research translated into computational design tools.</p>
+          <p>{{ developments.section.summary | escape }}</p>
         </header>
 
-        <article class="development-card">
-          <a href="https://www.food4rhino.com/en/app/bsim?lang=en" aria-label="Open BSim project">
-            <img src="assets/bsim.webp" alt="BSim agent-based modelling tool interface" width="1800" height="817" loading="lazy" />
-            <div>
-              <span>01 / Agent-based modelling</span>
-              <h3>BSim</h3>
-              <p>Agent-based simulation linking spatial behavior and performance-based modelling.</p>
-              <b>View project ↗</b>
-            </div>
-          </a>
-        </article>
-
-        <article class="development-card reverse">
-          <a href="https://github.com/YuchiSHEN/ADRFR" aria-label="Open ADRFR project">
-            <img src="assets/adrfr.webp" alt="ADRFR form-finding tool structural model" width="1800" height="1318" loading="lazy" />
-            <div>
-              <span>02 / Equilibrium computation</span>
-              <h3>ADRFR</h3>
-              <p>Alternative Directional Residual Reduction method and solver for discrete network structures.</p>
-              <b>View repository ↗</b>
-            </div>
-          </a>
-        </article>
-
-        <article class="development-card">
-          <a href="https://github.com/computational-structural-design/VGS" aria-label="Open VGS project">
-            <img src="assets/vgs.webp" alt="Vector-based Graphic Statics tool interface" width="1800" height="710" loading="lazy" />
-            <div>
-              <span>03 / Graphic statics</span>
-              <h3>VGS</h3>
-              <p>Interactive force–form exploration for early-stage architectural structural design.</p>
-              <b>View repository ↗</b>
-            </div>
-          </a>
-        </article>
+        {% for item in developments.items %}
+          <article class="development-card{% if item.reverse %} reverse{% endif %}">
+            <a href="{{ item.url }}" aria-label="Open {{ item.title | escape }} project">
+              <img
+                src="{{ item.image | relative_url }}"
+                alt="{{ item.image_alt | escape }}"
+                width="{{ item.image_width }}"
+                height="{{ item.image_height }}"
+                loading="lazy"
+              />
+              <div>
+                <span>{{ item.index }} / {{ item.category | escape }}</span>
+                <h3>{{ item.title | escape }}</h3>
+                <p>{{ item.description | escape }}</p>
+                <b>{{ item.link_label | escape }}</b>
+              </div>
+            </a>
+          </article>
+        {% endfor %}
       </section>
 
       <section class="content-section statement page-grid" id="statement">
         <div class="section-marker">
-          <span>09</span>
-          <h2>Personal statement</h2>
+          <span>{{ statement.section.number }}</span>
+          <h2>{{ statement.section.title | escape }}</h2>
         </div>
         <div class="section-content statement-copy">
-          <p>
-            I am applying to join the Young Editorial Board of Architectural Intelligence. My
-            research focuses on computational methods for architectural–structural integration,
-            aiming to translate rigorous algorithms into tools that can support real design
-            decision-making. I received my PhD from Southeast University and completed joint PhD
-            training at ETH Zürich (2019–2020), which established long-term collaboration across
-            architecture, engineering, and computation.
-          </p>
-          <p>
-            On the technical side, I am a principal developer of the Vector-based Graphic Statics
-            (VGS) toolchain (in collaboration with UCLeuven), enabling interactive force–form
-            exploration for early-stage structural design. I also led the development of the
-            Alternative Directional Residual Reduction (ADRR) method and solver for equilibrium
-            computation of discrete network structures, and developed BSim, an agent-based
-            simulation platform linking spatial behavior and performance-based modeling. These
-            efforts have resulted in peer-reviewed publications in journals such as Automation in
-            Construction, Computer-Aided Design, Building Simulation, and Thin-Walled Structures.
-          </p>
-          <p>
-            I have served as a reviewer for leading journals including Automation in Construction
-            and Computer-Aided Design, which has strengthened my ability to assess methodological
-            rigor, novelty, and clarity for interdisciplinary audiences. As a Young Editorial Board
-            member, I would contribute by providing timely and constructive reviews, supporting
-            special issues around reproducible computational workflows and design intelligence,
-            and helping the journal further connect advanced research with architectural practice.
-          </p>
-          <img class="signature" src="assets/signature.webp" alt="Yuchi Shen signature" width="900" height="174" loading="lazy" />
+          {% for paragraph in statement.paragraphs %}<p>{{ paragraph | escape }}</p>{% endfor %}
+          <img
+            class="signature"
+            src="{{ statement.signature | relative_url }}"
+            alt="{{ statement.signature_alt | escape }}"
+            width="{{ statement.signature_width }}"
+            height="{{ statement.signature_height }}"
+            loading="lazy"
+          />
         </div>
       </section>
     </main>
 
     <footer class="site-footer page-grid">
-      <p>Dr. Yuchi Shen<br />Architecture · Structure · Computation</p>
-      <p>Curriculum Vitae<br />Last updated from source document: 2026</p>
+      <p>{{ profile.display_name | escape }}<br />{{ profile.discipline | escape }}</p>
+      <p>Curriculum Vitae<br />Generated from <code>_data/cv/*.yml</code></p>
       <a href="#top">Back to top ↑</a>
     </footer>
   </body>

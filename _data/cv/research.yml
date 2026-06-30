@@ -1,0 +1,43 @@
+section:
+  number: "04"
+  title: Funded research
+items:
+  - code: "NSFC / 52208010"
+    role: Principal Investigator
+    title: Digital “Architecture–Structure” Interactive Design
+    description: >-
+      National Natural Science Foundation of China, Youth Science Fund Project.
+      *Research on Digital “Architecture–Structure” Interactive Design Methods Based
+      on Dynamically Adapted Reused Components.*
+    meta: "Jan 2023 — Dec 2025 · Funding ¥300,000"
+  - code: "CPSF / 2025M771608"
+    role: Principal Investigator
+    title: China Postdoctoral Science Foundation
+    description: 77th General Program.
+  - code: "CPSF / 2022M720716"
+    role: Principal Investigator
+    title: China Postdoctoral Science Foundation
+    description: 72nd General Program.
+  - code: "CPSF / 2024T170140"
+    role: Principal Investigator
+    title: China Postdoctoral Science Foundation
+    description: 17th Special Fund.
+  - code: "R&D / 6301001087"
+    role: Subproject Lead
+    title: Green-Performance Foundation Model
+    description: >-
+      National Key R&D Program of China. Research on a Green-Performance, Intelligent
+      Knowledge-Representation–Enhanced Foundation Model.
+  - code: "NSFC / 52394220"
+    role: Key Research Member
+    title: Building Design Toward Carbon Neutrality
+    description: >-
+      NSFC Major Program. Task 4: *Prototype Construction of Carbon-Neutral Building
+      Technologies in High-Density Urban Environments.* Grant No. 52394224.
+  - code: "CAE × NSFC"
+    role: Research Assistant
+    title: Green and Low-Carbon Urban Renewal
+    description: >-
+      Chinese Academy of Engineering & NSFC Joint Strategic Research Project.
+      *Strategic Research on the Development of a Green and Low-Carbon Urban Renewal
+      Technology System Toward 2040.*

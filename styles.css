@@ -223,6 +223,9 @@ h1 span:last-child {
 
 .portrait-frame img {
   width: 100%;
+  aspect-ratio: 0.89;
+  object-fit: cover;
+  object-position: 50% 35%;
   filter: grayscale(100%) contrast(1.05);
 }
 
@@ -399,6 +402,14 @@ dd {
   max-width: 860px;
   margin: 0;
   line-height: 1.6;
+}
+
+.markdown-copy > :first-child {
+  margin-top: 0;
+}
+
+.markdown-copy > :last-child {
+  margin-bottom: 0;
 }
 
 .project-list .eyebrow {
