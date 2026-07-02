@@ -9,7 +9,6 @@ layout: null
 {% assign awards = site.data.cv.awards %}
 {% assign activities = site.data.cv.activities %}
 {% assign developments = site.data.cv.developments %}
-{% assign statement = site.data.cv.statement %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -81,21 +80,36 @@ layout: null
         </dl>
       </section>
 
-      <section class="content-section statement page-grid" id="statement">
+      <section class="content-section page-grid" id="profile">
         <div class="section-marker">
-          <span>{{ statement.section.number }}</span>
-          <h2>{{ statement.section.title | escape }}</h2>
+          <span>{{ profile.section.number }}</span>
+          <h2>{{ profile.section.title | escape }}</h2>
         </div>
-        <div class="section-content statement-copy">
-          {% for paragraph in statement.paragraphs %}<p>{{ paragraph | escape }}</p>{% endfor %}
-          <img
-            class="signature"
-            src="{{ statement.signature | relative_url }}"
-            alt="{{ statement.signature_alt | escape }}"
-            width="{{ statement.signature_width }}"
-            height="{{ statement.signature_height }}"
-            loading="lazy"
-          />
+        <div class="section-content profile-summary">
+          {% for paragraph in profile.summary %}
+            <p{% if forloop.first %} class="lead"{% endif %}>{{ paragraph | escape }}</p>
+          {% endfor %}
+        </div>
+      </section>
+
+      <section class="content-section page-grid" id="education">
+        <div class="section-marker">
+          <span>{{ education.section.number }}</span>
+          <h2>{{ education.section.title | escape }}</h2>
+        </div>
+        <div class="section-content timeline">
+          {% for item in education.items %}
+            {% if item.degree %}
+              <article>
+                <time>{{ item.period | escape }}</time>
+                <div>
+                  <h3>{{ item.degree | escape }}</h3>
+                  {% if item.institution %}<p>{{ item.institution | escape }}</p>{% endif %}
+                  {% if item.dates %}<small>{{ item.dates | escape }}</small>{% endif %}
+                </div>
+              </article>
+            {% endif %}
+          {% endfor %}
         </div>
       </section>
 
@@ -129,36 +143,6 @@ layout: null
         {% endfor %}
       </section>
 
-      <section class="content-section page-grid" id="profile">
-        <div class="section-marker">
-          <span>{{ profile.section.number }}</span>
-          <h2>{{ profile.section.title | escape }}</h2>
-        </div>
-        <div class="section-content profile-intro">
-          <p class="lead">{{ profile.intro.lead | escape }}</p>
-          <p>{{ profile.intro.body | escape }}</p>
-        </div>
-      </section>
-
-      <section class="content-section page-grid" id="education">
-        <div class="section-marker">
-          <span>{{ education.section.number }}</span>
-          <h2>{{ education.section.title | escape }}</h2>
-        </div>
-        <div class="section-content timeline">
-          {% for item in education.items %}
-            <article>
-              <time>{{ item.period | escape }}</time>
-              <div>
-                <h3>{{ item.degree | escape }}</h3>
-                {% if item.institution %}<p>{{ item.institution | escape }}</p>{% endif %}
-                {% if item.dates %}<small>{{ item.dates | escape }}</small>{% endif %}
-              </div>
-            </article>
-          {% endfor %}
-        </div>
-      </section>
-
       <section class="content-section page-grid" id="experience">
         <div class="section-marker">
           <span>{{ experience.section.number }}</span>
@@ -175,6 +159,21 @@ layout: null
             </div>
           </div>
         {% endfor %}
+      </section>
+
+      <section class="content-section page-grid" id="publications">
+        <div class="section-marker">
+          <span>{{ publications.section.number }}</span>
+          <h2>{{ publications.section.title | escape }}</h2>
+        </div>
+        <ol class="section-content publication-list">
+          {% for item in publications.items %}
+            <li>
+              <span>{{ item.year | escape }}</span>
+              {{ item.citation | markdownify }}
+            </li>
+          {% endfor %}
+        </ol>
       </section>
 
       <section class="content-section page-grid" id="research">
@@ -195,21 +194,6 @@ layout: null
             </article>
           {% endfor %}
         </div>
-      </section>
-
-      <section class="content-section page-grid" id="publications">
-        <div class="section-marker">
-          <span>{{ publications.section.number }}</span>
-          <h2>{{ publications.section.title | escape }}</h2>
-        </div>
-        <ol class="section-content publication-list">
-          {% for item in publications.items %}
-            <li>
-              <span>{{ item.year | escape }}</span>
-              {{ item.citation | markdownify }}
-            </li>
-          {% endfor %}
-        </ol>
       </section>
 
       <section class="content-section page-grid" id="awards">
