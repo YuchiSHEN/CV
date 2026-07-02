@@ -1,5 +1,5 @@
 section:
-  number: "04"
+  number: "02"
   title: Education
 items:
   - period: "2016—2021"
@@ -14,5 +14,3 @@ items:
     degree: Master of Architecture
     institution: Southeast University, China
     dates: September 2013 — June 2016
-  - period: "—"
-    degree: Bachelor

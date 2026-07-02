@@ -29,23 +29,31 @@ contact:
   - label: Address
     value: "Sipailou 2#, Southeast University"
     secondary: "Nanjing, China"
-intro:
-  lead: >-
-    Computational methods for architectural–structural integration, translating rigorous
-    algorithms into tools that support real design decision-making.
-  body: >-
-    Yuchi Shen received his PhD from Southeast University and completed joint PhD training
-    at ETH Zürich, establishing long-term collaboration across architecture, engineering,
+summary:
+  - >-
+    Yuchi Shen is an architectural researcher at Southeast University working across
+    computational design, structural form-finding, and building performance. His work
+    translates rigorous algorithms into practical tools for early-stage design decisions.
+  - >-
+    He received his PhD in Architecture from Southeast University and completed joint
+    doctoral training at ETH Zürich (2019–2020). Since 2022, he has continued this research
+    as a postdoctoral researcher and assistant researcher across architecture, engineering,
     and computation.
+  - >-
+    His featured contributions include the Vector-based Graphic Statics (VGS) toolchain,
+    the ADRR equilibrium solver for discrete networks, and BSim for agent-based spatial and
+    performance simulation. This work has led to funded research and publications in
+    Automation in Construction, Computer-Aided Design, Building Simulation, and
+    Thin-Walled Structures.
 navigation:
-  - label: Statement
-    href: "#statement"
-  - label: Developments
-    href: "#developments"
   - label: Profile
     href: "#profile"
-  - label: Research
-    href: "#research"
+  - label: Education
+    href: "#education"
+  - label: Developments
+    href: "#developments"
+  - label: Publications
+    href: "#publications"
 section:
-  number: "03"
+  number: "01"
   title: Profile

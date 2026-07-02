@@ -8,7 +8,7 @@ YAML 适合简历中的结构化列表，手工编辑比 JSON 简洁，也比纯
 
 ## 文件对应关系
 
-- `profile.yml`：姓名、职位、联系方式、头像、导航和简介
+- `profile.yml`：姓名、职位、联系方式、头像、导航和综合简介
 - `education.yml`：教育经历
 - `experience.yml`：工作与博士后经历
 - `research.yml`：基金与研究项目
@@ -16,7 +16,6 @@ YAML 适合简历中的结构化列表，手工编辑比 JSON 简洁，也比纯
 - `awards.yml`：奖项与荣誉
 - `activities.yml`：专业活动与工作坊
 - `developments.yml`：开发工具、链接与项目图片
-- `statement.yml`：个人陈述和签名图片
 
 ## 增减条目
 

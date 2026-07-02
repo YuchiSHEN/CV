@@ -297,23 +297,26 @@ dd {
   grid-column: 4 / 13;
 }
 
-.profile-intro {
+.profile-summary {
   display: grid;
-  grid-template-columns: 1.5fr 1fr;
-  gap: 9%;
-  align-items: end;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px 6%;
 }
 
-.profile-intro p {
+.profile-summary p {
   margin: 0;
-  line-height: 1.7;
+  font-family: Georgia, "Times New Roman", "Noto Serif SC", serif;
+  font-size: clamp(1rem, 1.3vw, 1.12rem);
+  line-height: 1.62;
 }
 
-.profile-intro .lead {
-  font-size: clamp(1.9rem, 4vw, 4rem);
+.profile-summary .lead {
+  grid-column: 1 / -1;
+  font-family: inherit;
+  font-size: clamp(1.5rem, 3vw, 2.6rem);
   font-weight: 500;
-  line-height: 1.04;
-  letter-spacing: -0.055em;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
 }
 
 .timeline article,
@@ -561,34 +564,6 @@ dd {
   line-height: 1.6;
 }
 
-.statement-copy {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 28px 6%;
-}
-
-.statement-copy p {
-  margin: 0;
-  font-family: Georgia, "Times New Roman", "Noto Serif SC", serif;
-  font-size: clamp(1rem, 1.4vw, 1.18rem);
-  line-height: 1.68;
-}
-
-.statement-copy p:first-child {
-  grid-column: 1 / -1;
-  font-size: clamp(1.5rem, 3vw, 2.6rem);
-  line-height: 1.23;
-  letter-spacing: -0.025em;
-}
-
-.signature {
-  grid-column: 2;
-  justify-self: end;
-  width: min(280px, 80%);
-  margin-top: 18px;
-  mix-blend-mode: multiply;
-}
-
 .site-footer {
   min-height: 180px;
   padding: 40px 0;
@@ -679,14 +654,11 @@ dd {
     grid-column: 4 / 13;
   }
 
-  .profile-intro,
-  .statement-copy {
+  .profile-summary {
     grid-template-columns: 1fr;
   }
 
-  .profile-intro .lead,
-  .statement-copy p:first-child,
-  .signature {
+  .profile-summary .lead {
     grid-column: 1;
   }
 }
@@ -762,11 +734,11 @@ dd {
     font-size: 2.3rem;
   }
 
-  .profile-intro {
+  .profile-summary {
     display: block;
   }
 
-  .profile-intro p + p {
+  .profile-summary p + p {
     margin-top: 30px;
   }
 
@@ -824,19 +796,6 @@ dd {
 
   .development-card h3 {
     font-size: 4.8rem;
-  }
-
-  .statement-copy {
-    display: block;
-  }
-
-  .statement-copy p + p {
-    margin-top: 30px;
-  }
-
-  .signature {
-    margin-top: 46px;
-    margin-left: auto;
   }
 
   .site-footer {
