@@ -4,6 +4,62 @@ section:
   summary: Research translated into computational design tools.
 items:
   - index: "01"
+    category: Spatial lattice
+    title: 3D Lattice
+    description: Animated spatial lattice transformation for architectural structural design.
+    image: assets/260708-3DLattice.gif
+    image_alt: Animated 3D lattice structure transformation
+    image_width: 1000
+    image_height: 636
+  - index: "02"
+    category: Tensegrity structures
+    title: Tensegrity Shell
+    description: Animated tensegrity shell study for lightweight structural assemblies.
+    image: assets/TengrityShell-1.gif
+    image_alt: Animated tensegrity shell structural system
+    image_width: 1936
+    image_height: 1080
+  - index: "03"
+    category: Dome structures
+    title: Spiral Dome
+    description: Animated spiral dome study for curved structural systems.
+    image: assets/260708-SpiralDome.gif
+    image_alt: Animated spiral dome structural geometry
+    image_width: 1200
+    image_height: 1182
+  - index: "04"
+    category: Folded structures
+    title: Simple Fold
+    description: Animated exploration of geometric folding and structural transformation.
+    image: assets/260708-Simple_fold.gif
+    image_alt: Animated simple folded structure transformation
+    image_width: 2000
+    image_height: 929
+  - index: "05"
+    category: Bridge system
+    title: Case Bridge
+    description: Animated bridge case study connecting form finding and structural articulation.
+    image: assets/260708-Case-Bridge02.gif
+    image_alt: Animated bridge case structural system
+    image_width: 2000
+    image_height: 1272
+  - index: "06"
+    category: Equilibrium computation
+    title: 3D Arch ADRFR
+    description: Animated arch study using alternative directional residual reduction.
+    image: assets/3DArch_ADRFR_.gif
+    image_alt: Animated 3D arch ADRFR structural study
+    image_width: 1500
+    image_height: 974
+  - index: "07"
+    category: Structural animation
+    title: DNA Bridge
+    description: Animated bridge exploration using DNA-inspired structural geometry.
+    image: assets/0708-DNA-bridge.gif
+    image_alt: Animated DNA-inspired bridge structural study
+    image_width: 1500
+    image_height: 861
+  - index: "08"
     category: Agent-based modelling
     title: BSim
     description: Agent-based simulation linking spatial behavior and performance-based modelling.
@@ -13,67 +69,3 @@ items:
     image_alt: BSim agent-based modelling tool interface
     image_width: 3248
     image_height: 1475
-  - index: "02"
-    category: Structural animation
-    title: DNA Bridge
-    description: Animated bridge exploration using DNA-inspired structural geometry.
-    image: assets/0708-DNA-bridge.gif
-    image_alt: Animated DNA-inspired bridge structural study
-    image_width: 1500
-    image_height: 861
-  - index: "03"
-    category: Spatial lattice
-    title: 3D Lattice
-    description: Animated spatial lattice transformation for architectural structural design.
-    image: assets/260708-3DLattice.gif
-    image_alt: Animated 3D lattice structure transformation
-    image_width: 1000
-    image_height: 636
-  - index: "04"
-    category: Bridge system
-    title: Case Bridge
-    description: Animated bridge case study connecting form finding and structural articulation.
-    image: assets/260708-Case-Bridge02.gif
-    image_alt: Animated bridge case structural system
-    image_width: 2000
-    image_height: 1272
-  - index: "05"
-    category: Dome structures
-    title: Dome
-    description: Animated dome geometry study for curved structural assemblies.
-    image: assets/260708-Dome.gif
-    image_alt: Animated dome structural geometry
-    image_width: 1200
-    image_height: 1090
-  - index: "06"
-    category: Folded structures
-    title: Simple Fold
-    description: Animated exploration of geometric folding and structural transformation.
-    image: assets/260708-Simple_fold.gif
-    image_alt: Animated simple folded structure transformation
-    image_width: 2000
-    image_height: 929
-  - index: "07"
-    category: Dome structures
-    title: Spiral Dome
-    description: Animated spiral dome study for curved structural systems.
-    image: assets/260708-SpiralDome.gif
-    image_alt: Animated spiral dome structural geometry
-    image_width: 1200
-    image_height: 1182
-  - index: "08"
-    category: Equilibrium computation
-    title: 3D Arch ADRFR
-    description: Animated arch study using alternative directional residual reduction.
-    image: assets/3DArch_ADRFR_.gif
-    image_alt: Animated 3D arch ADRFR structural study
-    image_width: 1500
-    image_height: 974
-  - index: "09"
-    category: Tensegrity structures
-    title: Tensegrity Shell
-    description: Animated tensegrity shell study for lightweight structural assemblies.
-    image: assets/TengrityShell-1.gif
-    image_alt: Animated tensegrity shell structural system
-    image_width: 1936
-    image_height: 1080
