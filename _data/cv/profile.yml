@@ -12,11 +12,8 @@ institution:
   - School of Architecture
   - Southeast University
 location: Nanjing
-coordinates:
-  - "32.06° N"
-  - "118.80° E"
-photo: assets/profile.jpg
-photo_alt: "Portrait of Dr. Yuchi Shen at the Colosseum in Rome"
+photo: assets/profile-portrait.jpg
+photo_alt: "Portrait of Dr. Yuchi Shen"
 contact:
   - label: Email
     value: sycarchi@outlook.com
@@ -50,8 +47,6 @@ navigation:
     href: "#profile"
   - label: Education
     href: "#education"
-  - label: Developments
-    href: "#developments"
   - label: Publications
     href: "#publications"
 section:
