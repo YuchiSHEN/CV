@@ -32,38 +32,62 @@ layout: null
     </header>
 
     <main id="top">
-      <section class="hero page-grid" aria-labelledby="hero-title">
-        <div class="hero-index" aria-hidden="true">
-          <span>CV / {{ site.time | date: '%Y' }}</span>
-          <span>{{ profile.coordinates[0] }}<br />{{ profile.coordinates[1] }}</span>
+      <section class="visual-intro" aria-label="Selected project previews">
+        <header class="carousel-header" aria-hidden="true">
+          <span class="carousel-overline">Selected work</span>
+          <div class="carousel-title-track">
+            {% for item in developments.items %}
+              <p class="carousel-title{% if forloop.first %} is-active{% endif %}">
+                <strong>{{ item.title | escape }}</strong>
+                <span>{{ item.category | escape }}</span>
+              </p>
+            {% endfor %}
+          </div>
+          <span class="carousel-counter">01—{{ developments.items.size | prepend: '0' | slice: -2, 2 }}</span>
+        </header>
+        <div class="carousel" data-carousel>
+          {% for item in developments.items %}
+            <figure class="carousel-slide{% if forloop.first %} is-active{% endif %}">
+              <img
+                data-src="{{ item.image | relative_url }}"
+                {% if forloop.first %}src="{{ item.image | relative_url }}"{% endif %}
+                alt="{{ item.image_alt | escape }}"
+                width="{{ item.image_width }}"
+                height="{{ item.image_height }}"
+              />
+            </figure>
+          {% endfor %}
         </div>
+      </section>
 
-        <div class="hero-title-wrap">
+      <section class="identity page-grid" id="profile" aria-labelledby="profile-title">
+        <div class="identity-primary">
           <p class="kicker">{{ profile.discipline | escape }}</p>
-          <h1 id="hero-title">
-            <span>{{ profile.name.given | escape }}</span><span>{{ profile.name.family | escape }}</span>
-          </h1>
-          <p class="hero-role">
-            {% for role in profile.role %}{{ role | escape }}{% unless forloop.last %}<br />{% endunless %}{% endfor %}
-          </p>
+          <h1 class="identity-heading" id="profile-title">{{ profile.display_name | escape }}</h1>
+          <div class="identity-summary">
+            <p>{{ profile.summary[0] | escape }}</p>
+          </div>
+          <dl class="identity-meta">
+            <div>
+              <dt>Role</dt>
+              <dd>{% for role in profile.role %}{{ role | escape }}{% unless forloop.last %}<br />{% endunless %}{% endfor %}</dd>
+            </div>
+            <div>
+              <dt>Current position</dt>
+              <dd>{% for line in profile.institution %}{{ line | escape }}{% unless forloop.last %}<br />{% endunless %}{% endfor %}</dd>
+            </div>
+          </dl>
         </div>
 
         <figure class="portrait-frame">
           <img
             src="{{ profile.photo | relative_url }}"
             alt="{{ profile.photo_alt | escape }}"
-            width="766"
-            height="786"
+            width="2944"
+            height="4000"
           />
           <figcaption>{{ profile.display_name | escape }} / {{ profile.location | escape }}</figcaption>
         </figure>
-
-        <div class="hero-institution">
-          <span class="rule-label">Current position</span>
-          <p>
-            {% for line in profile.institution %}{{ line | escape }}{% unless forloop.last %}<br />{% endunless %}{% endfor %}
-          </p>
-        </div>
       </section>
 
       <section class="contact-strip" aria-label="Contact details">
@@ -78,18 +102,6 @@ layout: null
             </div>
           {% endfor %}
         </dl>
-      </section>
-
-      <section class="content-section page-grid" id="profile">
-        <div class="section-marker">
-          <span>{{ profile.section.number }}</span>
-          <h2>{{ profile.section.title | escape }}</h2>
-        </div>
-        <div class="section-content profile-summary">
-          {% for paragraph in profile.summary %}
-            <p{% if forloop.first %} class="lead"{% endif %}>{{ paragraph | escape }}</p>
-          {% endfor %}
-        </div>
       </section>
 
       <section class="content-section page-grid" id="education">
@@ -111,36 +123,6 @@ layout: null
             {% endif %}
           {% endfor %}
         </div>
-      </section>
-
-      <section class="developments" id="developments" aria-labelledby="developments-title">
-        <header class="developments-header page-grid">
-          <div class="section-marker light">
-            <span>{{ developments.section.number }}</span>
-            <h2 id="developments-title">{{ developments.section.title | escape }}</h2>
-          </div>
-          <p>{{ developments.section.summary | escape }}</p>
-        </header>
-
-        {% for item in developments.items %}
-          <article class="development-card{% if item.reverse %} reverse{% endif %}">
-            <a href="{{ item.url }}" aria-label="Open {{ item.title | escape }} project">
-              <img
-                src="{{ item.image | relative_url }}"
-                alt="{{ item.image_alt | escape }}"
-                width="{{ item.image_width }}"
-                height="{{ item.image_height }}"
-                loading="lazy"
-              />
-              <div>
-                <span>{{ item.index }} / {{ item.category | escape }}</span>
-                <h3>{{ item.title | escape }}</h3>
-                <p>{{ item.description | escape }}</p>
-                <b>{{ item.link_label | escape }}</b>
-              </div>
-            </a>
-          </article>
-        {% endfor %}
       </section>
 
       <section class="content-section page-grid" id="experience">
@@ -234,5 +216,33 @@ layout: null
       <p>Curriculum Vitae<br />Generated from <code>_data/cv/*.yml</code></p>
       <a href="#top">Back to top ↑</a>
     </footer>
+    <script>
+      (() => {
+        const carousel = document.querySelector('[data-carousel]');
+        if (!carousel) return;
+
+        const slides = Array.from(carousel.querySelectorAll('.carousel-slide'));
+        const titles = Array.from(document.querySelectorAll('.carousel-title'));
+        let activeIndex = 0;
+
+        const activate = (nextIndex) => {
+          slides.forEach((slide, index) => {
+            const isActive = index === nextIndex;
+            slide.classList.toggle('is-active', isActive);
+            titles[index]?.classList.toggle('is-active', isActive);
+
+            const image = slide.querySelector('img');
+            if (isActive && !image.getAttribute('src')) image.setAttribute('src', image.dataset.src);
+            if (!isActive) image.removeAttribute('src');
+          });
+          activeIndex = nextIndex;
+        };
+
+        activate(0);
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && slides.length > 1) {
+          window.setInterval(() => activate((activeIndex + 1) % slides.length), 6000);
+        }
+      })();
+    </script>
   </body>
 </html>

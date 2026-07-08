@@ -11,20 +11,27 @@ items:
     link_label: View project ↗
     image: assets/bsim.gif
     image_alt: BSim agent-based modelling tool interface
-    image_width: 1800
-    image_height: 817
+    image_width: 3248
+    image_height: 1475
   - index: "02"
     category: Equilibrium computation
     title: ADRFR
     description: Alternative Directional Residual Reduction method and solver for discrete network structures.
     url: "https://github.com/YuchiSHEN/ADRFR"
     link_label: View repository ↗
-    image: assets/adrfr.gif
-    image_alt: ADRFR form-finding tool structural model
-    image_width: 1800
-    image_height: 1318
-    reverse: true
+    image: assets/lattice-transform.gif
+    image_alt: Animated ADRFR lattice structure transformation
+    image_width: 1793
+    image_height: 1477
   - index: "03"
+    category: Folded structures
+    title: Folded Structure
+    description: Animated exploration of geometric folding and structural transformation.
+    image: assets/simple-fold.gif
+    image_alt: Folded structure transformation animation
+    image_width: 960
+    image_height: 446
+  - index: "04"
     category: Graphic statics
     title: VGS
     description: Interactive force–form exploration for early-stage architectural structural design.
@@ -32,5 +39,5 @@ items:
     link_label: View repository ↗
     image: assets/vgs.gif
     image_alt: Vector-based Graphic Statics tool interface
-    image_width: 1800
-    image_height: 710
+    image_width: 3347
+    image_height: 1320
